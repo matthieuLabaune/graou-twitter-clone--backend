@@ -45,3 +45,7 @@ Route::get('/users/{user}', function (User $user) {
         'id', 'name', 'username', 'avatar', 'profile', 'location', 'link', 'linkText', 'created_at'
     );
 });
+
+Route::get('/users/{user}/tweets', function (User $user) {
+    return $user->tweets()->with('user:id,name,username,avatar')->latest()->paginate(10);
+});
