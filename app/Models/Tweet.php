@@ -10,6 +10,8 @@ class Tweet extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     /**
      * @return BelongsTo
      */
