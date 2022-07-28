@@ -46,6 +46,33 @@ class User extends Authenticatable
         return $this->hasMany(Tweet::class);
     }
 
+    /**
+     * @param User $user
+     * @return void
+     */
+    public function follow(User $user)
+    {
+        return $this->follows()->attach($user);
+    }
+
+    /**
+     * @param User $user
+     * @return int
+     */
+    public function unfollow(User $user)
+    {
+        return $this->follows()->detach($user);
+    }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function isFollowing(User $user)
+    {
+        return $this->follows()->where('id', $user->id)->exists();
+    }
+
 
     public function follows()
     {
